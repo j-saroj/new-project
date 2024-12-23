@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminPanelController;
@@ -9,13 +8,8 @@ use App\Http\Controllers\OrganizationController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\SkillController;
+use App\Http\Controllers\WebPageController;
 
-Route::get('/', function () {
-    return view('admin.pages.login');
-});
-Route::get('home', function () {
-    return view('admin.pages.login');
-})->name('home');
 
 
 Route::get('/login', [AuthController::class, 'loginPage'])->name('login');
@@ -23,10 +17,6 @@ Route::post('/authenticate', [AuthController::class, 'login'])->name('authentica
 Route::middleware('auth')->group(function () {
 
     Route::get('/dashboard', [AdminPanelController::class, 'dashboard'])->name('dashboard');
-
-
-    // Route::get('/dashboard',  [AdminPanelController::class, 'dashboard'])->name('dashboard');
-
 
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::get('/change-password', [UserController::class, 'showChangePasswordForm'])->name('change.password');
@@ -69,3 +59,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/email-subscribe', [AdminPanelController::class, 'getemailsubscribe'])->name('emailshow');
     Route::get('/resume', [AdminPanelController::class, 'resume'])->name('resumeshow');
 });
+Route::get('/', [WebPageController::class, 'index'])->name('front.home');
+Route::get('/gallery', [WebPageController::class, 'gallery'])->name('front.gallery');
+Route::get('/contact', [WebPageController::class, 'contactUs'])->name('front.contact');
+Route::get('/experience', [WebPageController::class, 'experience'])->name('front.experience');
+Route::get('/portfolio', [WebPageController::class, 'portfolio'])->name('front.portfolio');
+Route::post('/inquiry/store', [WebPageController::class, 'inquiry'])->name('inquiry.store');
