@@ -75,6 +75,20 @@
                 </a>
             </li>
 
+            <li class="nav-item w-100" @if (route('portfoliocategory.index') == url()->current()) active @endif>
+                <a class="nav-link" href="{{ route('portfoliocategory.index') }}">
+                    <i class="fe fe-image fe-16"></i>
+                    <span class="ml-3 item-text">PortFolio Category</span>
+                </a>
+            </li>
+
+            <li class="nav-item w-100" @if (route('portfolio.index') == url()->current()) active @endif>
+                <a class="nav-link" href="{{ route('portfolio.index') }}">
+                    <i class="fe fe-image fe-16"></i>
+                    <span class="ml-3 item-text">PortFolio</span>
+                </a>
+            </li>
+
 
 
 

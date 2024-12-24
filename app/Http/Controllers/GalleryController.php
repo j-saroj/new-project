@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\GalleryImage;
 use App\Models\Gallerys;
+use App\Models\PortfolioItem;
 use Illuminate\Http\Request;
 
 class GalleryController extends Controller
@@ -15,7 +16,9 @@ class GalleryController extends Controller
     public function index()
     {
         $gallery = GalleryImage::simplePaginate(15);
-        return view('admin.pages.gallerys.index', ['gallerys' => $gallery]);
+        $portfolios = PortfolioItem::all();
+        // dd($portfolios);
+        return view('admin.pages.gallerys.index', ['gallerys' => $gallery, 'portfolios' => $portfolios]);
     }
 
     /**
@@ -32,25 +35,26 @@ class GalleryController extends Controller
     public function store(Request $request)
     {
         $validator = $request->validate([
-            'name' => 'required',
-            'order' => 'numeric',
-            'image.*' => 'required|mimes:jpg,png,jpeg',
-            'nepali_name' => 'required',
-        ]);
-
-        $gallery = GalleryImage::create([
-            'name' => $request->name,
-            'order' => $request->order,
-            'nepali_name' => $request->nepali_name,
+            'title' => 'required',
+            'image' => 'required|mimes:jpg,png,jpeg',
+            'portfolio_id' => 'required',
         ]);
 
         if ($request->hasFile('image')) {
-            foreach ($request->file('image') as $file) {
-                $imageName = $request->user()->id . '_' . time() . '_' . uniqid() . '.' . $file->getClientOriginalExtension();
-                $path = $file->storeAs('images/members', $imageName);
-                $gallery->image()->create(['image' => $path]);
-            }
+            $imageName = $request->user()->id . '_' . time() . '.' . $request->file('image')->getClientOriginalExtension();
+            $path = $request->file('image')->storeAs('images/members', $imageName);
         }
+        // dd($request->all());
+
+        $gallery = GalleryImage::create([
+            'title' => $request->title,
+            'description' => $request->description,
+            'portfolio_id' => $request->portfolio_id,
+            'image' => $path,
+        ]);
+
+
+
         if ($gallery) {
             return redirect(route('gallery.index'))->withSuccess('The gallery has been added!');
         } else {
@@ -82,9 +86,7 @@ class GalleryController extends Controller
     {
         $validator = $request->validate([
             'name' => 'required',
-            'order' => 'numeric',
             'image.*' => 'required|mimes:jpg,png,jpeg',
-            'nepali_name' => 'required',
         ]);
 
         $flag = $gallery->update([

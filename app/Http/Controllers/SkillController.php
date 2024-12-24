@@ -13,26 +13,13 @@ class SkillController extends Controller
      */
     public function index()
     {
-        $skills = skill::all();
+        $skills = skill::paginate(10);
 
-            return view('admin.pages.skill.index', ['skill' => $skills]);
+            return view('admin.pages.skill.index', ['skills' => $skills]);
 
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     */
-    public function create()
-    {
-        $skill = Skill::first();
 
-        if (!isset($skill)) {
-            return view('admin.pages.skill.create');
-        } else {
-            return redirect(route('skill.index'));
-        }
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -44,17 +31,21 @@ class SkillController extends Controller
             return redirect(route('skill.show', $skill->id));
         }
         $validator = $request->validate([
+            'name' => 'required|string',
+            'percentage' => 'required|numeric',
+
 
         ]);
 
         $skill = Skill::create([
-
+            'name' => $request->name,
+            'percentage' => $request->percentage,
 
 
         ]);
 
         if ($skill) {
-            return redirect(route('skill.index'))->withSuccess("The skill details has beed set.");
+            return redirect(route('skills.index'))->withSuccess("The skill details has beed set.");
         } else {
             return redirect()->back()->withInput()->withErrors($validator);
         }
@@ -74,8 +65,8 @@ class SkillController extends Controller
      */
     public function edit(Skill $skill)
     {
-
-        return view('admin.pages.skill.edit', ['skill' => $skill]);
+        $skills = Skill::paginate(10);
+        return view('admin.pages.skill.edit', ['skill' => $skill, 'skills' => $skills]);
     }
 
     /**
@@ -85,17 +76,23 @@ class SkillController extends Controller
     {
         $validator = $request->validate([
             'name' => 'required|string',
-            'phone' => 'required',
-            'address' => 'required|string',
-            'mobile' => 'required|string',
-            'email' => 'required|email',
-            'logo' => 'required|mimes:jpg,png,jpeg|max:1024',
-        ]);
+            'percentage' => 'required|numeric',
 
-        $flag = $skill->update([
 
         ]);
 
+
+
+        $flag = $skill->update(['name' => $request->name,
+            'percentage' => $request->percentage,
+
+        ]);
+
+        if ($flag) {
+            return redirect(route('skills.index'))->withSuccess("The skill details has beed updated.");
+        } else {
+            return redirect()->back()->withInput()->withErrors($validator);
+        }
 
 
 
@@ -104,5 +101,14 @@ class SkillController extends Controller
     /**
      * Remove the specified resource from storage.
      */
+    public function destroy(Skill $skill){
+        $flag = $skill->delete();
+
+        if ($flag) {
+            return redirect(route('skills.index'))->withSuccess("The skill details has beed deleted.");
+        } else {
+            return redirect()->back()->withInput()->withErrors("The skill details has not been deleted.");
+        }
+    }
 
 }

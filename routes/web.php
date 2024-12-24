@@ -9,6 +9,8 @@ use App\Http\Controllers\OrganizationController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\SkillController;
+use App\Http\Controllers\PortfolioController;
+use App\Http\Controllers\PortfoliocategoryController;
 
 Route::get('/', function () {
     return view('admin.pages.login');
@@ -40,11 +42,23 @@ Route::middleware('auth')->group(function () {
     Route::post('/organization/update/{organization}', [OrganizationController::class, 'update'])->name('organization.update');
 
     Route::get('/skills', [SkillController::class, 'index'])->name('skills.index');
-    Route::get('/skills/add', [SkillController::class, 'create'])->name('skills.create');
-    Route::post('/skills/store', [SkillController::class, 'store'])->name('skills.store');
-    Route::get('/skills/show/{skill}', [SkillController::class, 'show'])->name('skills.show');
-    Route::get('/skills/edit/{skill}', [SkillController::class, 'edit'])->name('skills.edit');
-    Route::post('/skills/update/{skill}', [SkillController::class, 'update'])->name('skills.update');
+    Route::post('/skills/store', [SkillController::class, 'store'])->name('skill.store');
+    Route::get('/skills/edit/{skill}', [SkillController::class, 'edit'])->name('skill.edit');
+    Route::post('/skills/update/{skill}', [SkillController::class, 'update'])->name('skill.update');
+    Route::post('/skills/delete/{skill}', [SkillController::class, 'destroy'])->name('skill.destroy');
+
+    Route::get('/portfoliocategorys', [PortfoliocategoryController::class, 'index'])->name('portfoliocategory.index');
+    Route::get('/portfoliocategory/show/{portfoliocategory}', [PortfoliocategoryController::class, 'show'])->name('category.show');
+    Route::post('/portfoliocategory/store', [PortfoliocategoryController::class, 'store'])->name('portfoliocategory.store');
+    Route::get('/portfoliocategory/edit/{portfoliocategory}', [PortfoliocategoryController::class, 'edit'])->name('portfoliocategory.edit');
+    Route::post('/portfoliocategory/update/{portfoliocategory}', [PortfoliocategoryController::class, 'update'])->name('portfoliocategory.update');
+    Route::post('/portfoliocategory/delete/{portfoliocategory}', [PortfoliocategoryController::class, 'destroy'])->name('portfoliocategory.destroy');
+
+    Route::get('/portfolio', [PortfolioController::class, 'index'])->name('portfolio.index');
+    Route::post('/portfolio/store', [PortfolioController::class, 'store'])->name('portfolio.store');
+    Route::get('/portfolio/edit/{portfolio}', [PortfolioController::class, 'edit'])->name('portfolio.edit');
+    Route::post('/portfolio/update/{portfolio}', [PortfolioController::class, 'update'])->name('portfolio.update');
+    Route::post('/portfolio/delete/{portfolio}', [PortfolioController::class, 'destroy'])->name('portfolio.destroy');
 
     Route::get('/gallery', [GalleryController::class, 'index'])->name('gallery.index');
     Route::get('/gallery/add', [GalleryController::class, 'create'])->name('gallery.create');

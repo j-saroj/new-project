@@ -10,7 +10,12 @@ class PortfolioItem extends Model
         'title',
         'description',
         'image',
-        'category',
+        'category_id',
         'extra',
     ]);
+
+    public function category()
+    {
+        return $this->belongsTo(PortfolioCategory::class);
+    }
 }

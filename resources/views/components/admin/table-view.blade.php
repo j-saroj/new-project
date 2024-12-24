@@ -40,19 +40,32 @@
                     <div id="carouselExampleIndicators" class="carousel slide carousel-img bg-secondary px-5"
                         style="height: 300px;width:500px;">
                         <div class="carousel-indicators">
+                            @if(is_array($values->image))
                             @foreach ($values->image as $index => $image)
                                 <button type="button" data-bs-target="#carouselExampleIndicators"
                                     data-bs-slide-to="{{ $index }}" class="{{ $index === 0 ? 'active' : '' }}"
                                     aria-label="Slide {{ $index + 1 }}"></button>
                             @endforeach
+                            @endif
+
                         </div>
                         <div class="carousel-inner ">
+                            @if(is_array($values->image))
+
                             @foreach ($values->image as $index => $item)
                                 <div class="carousel-item{{ $index === 0 ? ' active' : '' }}  ">
                                     <img src="{{ asset('storage/' . $item->image) }}" alt="..."
                                         class="d-block me-auto px-auto" height="280px" width="auto">
                                 </div>
                             @endforeach
+                            @endif
+                            @if (!is_array($values->image))
+                                <div class="carousel-item active">
+                                    <img src="{{ asset('storage/' . $values->image) }}" alt="..."
+                                        class="d-block me-auto px-auto" height="280px" width="auto">
+                                </div>
+
+                            @endif
                         </div>
                         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
                             data-bs-slide="prev">

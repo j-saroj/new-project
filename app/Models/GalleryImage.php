@@ -14,7 +14,7 @@ class GalleryImage extends Model
         'extra',
     ]);
 
-    public function portfolioItem()
+    public function portfolio()
     {
         return $this->belongsTo(PortfolioItem::class);
     }
