@@ -6,7 +6,6 @@
             @csrf
             <x-admin.input label="Name" name="name" type="text" required="required" :oldvalue="$skill->name" />
             <x-admin.input label="Percentage" name="percentage" type="number" required="required" :oldvalue="$skill->percentage" />
-            <x-admin.input label="Extra" name="extra" type="text" required="required" :oldvalue="$skill->extra" />
 
 
             <div class="mt-5">

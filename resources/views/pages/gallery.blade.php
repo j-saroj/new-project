@@ -6,52 +6,31 @@
     <section class="gallery-main-section">
         <div class="container">
             <!-- Filter Buttons -->
-            {{-- <div class="filter-container">
-                <button class="filter-btn active" data-filter="all">
+            <div class="filter-container">
+                <button class="filter-btn active" data-filter="all" style="font-size: 13px;">
                     <span>All Works</span>
                 </button>
-                <button class="filter-btn" data-filter="wedding">
-                    <span>Wedding</span>
-                </button>
-                <button class="filter-btn" data-filter="portrait">
-                    <span>Portrait</span>
-                </button>
-                <button class="filter-btn" data-filter="event">
-                    <span>Events</span>
-                </button>
-                <button class="filter-btn" data-filter="fashion">
-                    <span>Fashion</span>
-                </button>
-            </div> --}}
+                @foreach ($portfolios as $portfolio)
+                    <button class="filter-btn" data-filter="{{ $portfolio->id }}" style="font-size: 13px;">
+                        <span>{{ $portfolio->title }}</span>
+                    </button>
+                @endforeach
+            </div>
 
             <!-- Gallery Grid -->
             <div class="gallery-grid">
                 @forelse ($gallery as $item)
                     <!-- Wedding Photos -->
-                    <div class="gallery-item" data-category="wedding">
-                        <a href="'{{asset('storage/'.$item->image)}}" data-lightbox="gallery" data-title="Wedding Photography">
-                            <img src="{{ asset('storage/'.$item->image) }}" alt="Wedding Photo" />
-                            <div class="gallery-overlay">
-                                <div class="gallery-info">
-                                    <span class="gallery-category">{{ $item->category?->name }}</span>
-                                    <h3>{{ $item->title }}</h3>
-                                </div>
-                            </div>
+                    <div class="gallery-item" data-category="{{ $item->portfolio->id }}">
+                        <a href="'{{ asset('storage/' . $item->image) }}" data-lightbox="gallery"
+                            data-title="Wedding Photography">
+                            <img src="{{ asset('storage/' . $item->image) }}" alt="Wedding Photo" />
+
                         </a>
                     </div>
 
                 @empty
-                    <div class="gallery-item" data-category="wedding">
-                        <a href="images/gallery/wedding1.jpg" data-lightbox="gallery" data-title="Wedding Photography">
-                            <img src="images/gallery/wedding1.jpg" alt="Wedding Photo" />
-                            <div class="gallery-overlay">
-                                <div class="gallery-info">
-                                    <span class="gallery-category">Wedding</span>
-                                    <h3>Beautiful Ceremony</h3>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
+                    <h1 class="text-center">No Images found</h1>
                 @endforelse
                 <!-- Add more gallery items following the same pattern -->
             </div>

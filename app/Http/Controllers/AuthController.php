@@ -10,7 +10,7 @@ class AuthController extends Controller
     //
     public function loginPage(){
         if(Auth::check()){
-            return redirect()->route('dashboard');
+            return redirect()->route('organization.index');
         }
 
 
@@ -29,7 +29,7 @@ class AuthController extends Controller
 
         if(Auth::attempt(['email' => $email, 'password' => $password])){
             $request->session()->regenerate();
-            return redirect()->route('dashboard');
+            return redirect()->route('organization.index');
         }else{
             return redirect()->back()->withErrors('The credentials does not match!');
         }

@@ -34,9 +34,10 @@
     <nav class="vertnav navbar navbar-light">
         <!-- nav bar -->
         <div class="w-100 mb-4 d-flex">
-            <a class="navbar-brand mx-auto mt-2 flex-fill text-center" href="{{ route('dashboard') }}">
+            <a class="navbar-brand mx-auto mt-2 flex-fill text-center" href="{{ route('organization.index') }}">
                 <div class="avatar avatar-md">
                     {{-- <img src="{{ asset('storage/' . $organization->logo) }}" alt="logo"> --}}
+                    Admin Panel
                 </div>
             </a>
         </div>
@@ -44,12 +45,7 @@
 
 
         <ul class="navbar-nav flex-fill w-100 mb-2">
-            <li class="nav-item w-100" @if (route('dashboard') == url()->current()) active @endif>
-                <a class="nav-link" href="{{ route('dashboard') }}">
-                    <i class="fe fe-home fe-16"></i>
-                    <span class="ml-3 item-text">Dashboard</span>
-                </a>
-            </li>
+
 
             <li class="nav-item w-100" @if (route('organization.index') == url()->current()) active @endif>
                 <a class="nav-link" href="{{ route('organization.index') }}">
@@ -60,7 +56,7 @@
 
             <li class="nav-item w-100" @if (route('skills.index') == url()->current()) active @endif>
                 <a class="nav-link" href="{{ route('skills.index') }}">
-                    <i class="fe fe-briefcase fe-16"></i>
+                    <i class="fe fe-zap  fe-16"></i>
                     <span class="ml-3 item-text">Skills</span>
                 </a>
             </li>
@@ -70,42 +66,42 @@
 
             <li class="nav-item w-100" @if (route('gallery.index') == url()->current()) active @endif>
                 <a class="nav-link" href="{{ route('gallery.index') }}">
-                    <i class="fe fe-image fe-16"></i>
+                    <i class="fe fe-camera  fe-16"></i>
                     <span class="ml-3 item-text">Gallery</span>
                 </a>
             </li>
 
             <li class="nav-item w-100" @if (route('portfoliocategory.index') == url()->current()) active @endif>
                 <a class="nav-link" href="{{ route('portfoliocategory.index') }}">
-                    <i class="fe fe-image fe-16"></i>
+                    <i class="fe fe-filter  fe-16"></i>
                     <span class="ml-3 item-text">PortFolio Category</span>
                 </a>
             </li>
 
             <li class="nav-item w-100" @if (route('portfolio.index') == url()->current()) active @endif>
                 <a class="nav-link" href="{{ route('portfolio.index') }}">
-                    <i class="fe fe-image fe-16"></i>
+                    <i class="fe fe-folder fe-16"></i>
                     <span class="ml-3 item-text">PortFolio</span>
                 </a>
             </li>
 
             <li class="nav-item w-100" @if (route('experience.index') == url()->current()) active @endif>
                 <a class="nav-link" href="{{ route('experience.index') }}">
-                    <i class="fe fe-image fe-16"></i>
+                    <i class="fe fe-clock   fe-16"></i>
                     <span class="ml-3 item-text">Experience</span>
                 </a>
             </li>
 
             <li class="nav-item w-100" @if (route('award.index') == url()->current()) active @endif>
                 <a class="nav-link" href="{{ route('award.index') }}">
-                    <i class="fe fe-image fe-16"></i>
+                    <i class="fe fe-star  fe-16"></i>
                     <span class="ml-3 item-text">Award</span>
                 </a>
             </li>
 
             <li class="nav-item w-100" @if (route('journey.index') == url()->current()) active @endif>
                 <a class="nav-link" href="{{ route('journey.index') }}">
-                    <i class="fe fe-image fe-16"></i>
+                    <i class="fe fe-map  fe-16"></i>
                     <span class="ml-3 item-text">Journey Stat</span>
                 </a>
             </li>
@@ -120,12 +116,7 @@
                 </a>
             </li>
 
-            <li class="nav-item w-100" @if (route('emailshow') == url()->current()) active @endif>
-                <a class="nav-link" href="{{ route('emailshow') }}">
-                    <i class="fe fe-mail fe-16"></i>
-                    <span class="ml-3 item-text">Subscribed Emails</span>
-                </a>
-            </li>
+
 
         </ul>
 

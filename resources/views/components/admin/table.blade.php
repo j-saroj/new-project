@@ -39,9 +39,9 @@
                             <td>{{ $loop->iteration }}</td>
                             @isset($value->image)
                                 <td>
-                                    @isset($value->image[0]->image)
+                                    @isset($value->image)
                                         <div class="avatar avatar-md">
-                                            <img src="{{ asset('storage/' . $value->image[0]->image) }}" class="avatar-img "
+                                            <img src="{{ asset('storage/' . $value->image) }}" class="avatar-img "
                                                 alt="" srcset="">
                                         </div>
                                     @endisset
@@ -57,7 +57,7 @@
                                                 <span class="badge bg-success">New</span>
                                             @endif
                                         @elseif($key == 'portfolio_id')
-                                            {{ $value->portfolio->name }}
+                                            {{ $value->portfolio->title }}
                                         @elseif($key == 'resume')
                                            <a href="{{ asset('storage/' . $value->resume) }}" download>
                                                     Download Resume

@@ -7,7 +7,6 @@
             @csrf
            <x-admin.input label="Name" name="name" type="text" required="required"/>
            <x-admin.input label="Percentage" name="percentage" type="number" required="required"/>
-           <x-admin.input label="Extra" name="extra" type="text" required="required"/>
 
 
             <div class="mt-5">

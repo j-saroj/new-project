@@ -18,4 +18,9 @@ class PortfolioItem extends Model
     {
         return $this->belongsTo(PortfolioCategory::class);
     }
+
+    public function galleryItems()
+    {
+        return $this->hasMany(GalleryImage::class,'portfolio_id');
+    }
 }

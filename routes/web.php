@@ -97,7 +97,7 @@ Route::middleware('auth')->prefix('admin')->group(function () {
     Route::get("/inquiries/show/{contact}", [ContactController::class, 'show'])->name("inquiry.show");
     Route::post("/inquiries/destroy/{contact}", [ContactController::class, 'destroy'])->name("inquiry.destroy");
 
-    ;
+    
 
 
     Route::get('/detach-image', [AdminPanelController::class, 'detach_image'])->name('detach.image');

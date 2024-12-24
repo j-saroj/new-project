@@ -32,7 +32,7 @@
                 @endforeach
             </div>
 
-            <x-admin.input name="image[]" label="Select Image" multiple type="file" placeholder="Select Image" />
+            <x-admin.input name="image[]" label="Select Image"  type="file" placeholder="Select Image" />
 
             <div class="mt-5">
                 <input type="submit" value="Update" class="btn btn-success px-4 py-2 ">

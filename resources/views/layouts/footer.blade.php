@@ -5,7 +5,6 @@
             <div class="col-lg-4 col-md-6">
 
                 @isset($organization->name)
-
                     <h5 class="mb-4">{{ $organization->name }}</h5>
                 @else
                     <h5 class="mb-4">TIMELESS MEMORIES</h5>
@@ -14,13 +13,11 @@
                 <p class="mb-4">
                     @isset($organization->sublitle)
                         {{ $organization->sublitle }}
-
                     @endisset
                 </p>
                 <div class="social-links">
                     @isset($organization->facebook)
                         <a href="{{ $organization->facebook }}" class="text-white me-3"><i class="fab fa-facebook-f"></i></a>
-
                     @endisset
                     @isset($organization->instagram)
                         <a href="{{ $organization->instagram }}" class="text-white me-3"><i
@@ -59,34 +56,33 @@
                 <ul class="footer-contact list-unstyled">
                     <li class="mb-3">
                         @isset($organization->address)
-                        <i class="fas fa-map-marker-alt me-2"></i>
+                            <i class="fas fa-map-marker-alt me-2"></i>
                             {{ $organization->address }}
                         @endisset
-                        </li>
-                        <li class="mb-3">
-                            @isset($organization->phone)
+                    </li>
+                    <li class="mb-3">
+                        @isset($organization->phone)
                             <i class="fas fa-phone me-2"></i>
 
-                                {{ $organization->phone }}
-                            @endisset
-                        </li>
-                        <li class="mb-3">
-                            @isset($organization->email)
-                        <i class="fas fa-envelope me-2"></i>
-                                {{ $organization->email }}
-
-                            @endisset
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="row mt-4">
-                <div class="col-12">
-                    <hr class="footer-divider" />
-                    <p class="text-center mb-0">
-                        © 2024 Timeless Memories. All rights reserved.
-                    </p>
-                </div>
+                            {{ $organization->phone }}
+                        @endisset
+                    </li>
+                    <li class="mb-3">
+                        @isset($organization->email)
+                            <i class="fas fa-envelope me-2"></i>
+                            {{ $organization->email }}
+                        @endisset
+                    </li>
+                </ul>
             </div>
         </div>
-    </footer>
+        <div class="row mt-4">
+            <div class="col-12">
+                <hr class="footer-divider" />
+                <p class="text-center mb-0">
+                    Developed by <a href="javascript:void(0)" class="text-decoration-none text-white">Web Innovations Services Pvt.
+                        Ltd.</a>
+            </div>
+        </div>
+    </div>
+</footer>

@@ -26,7 +26,7 @@ class WebPageController extends Controller
         $journeys = JourneyStat::get();
         $portfolios = PortfolioItem::get();
         $skills = Skill::get();
-        $galleryimages = GalleryImage::get();
+        $galleryimages = GalleryImage::latest()->take(6)->get();
         $awards = Award::get();
         return view('pages.homepage', compact('organization', 'journeys', 'portfolios', 'skills','galleryimages','awards'));
     }
@@ -40,13 +40,7 @@ class WebPageController extends Controller
         return view('pages.experience', compact('experiences','organization'));
     }
 
-    public function portfolio()
-    {
-        $organization = Organization::first();
 
-
-        return view('pages.portfolio',compact('organization'));
-    }
     public function contactUs()
     {
         $organization = Organization::first();
@@ -80,7 +74,8 @@ class WebPageController extends Controller
     {
         $gallery = GalleryImage::get();
         $organization = Organization::first();
-        return view('pages.gallery', compact('gallery','organization'));
+        $portfolios = PortfolioItem::get();
+        return view('pages.gallery', compact('gallery','organization','portfolios'));
     }
 
     public function gallery_detail($slug)

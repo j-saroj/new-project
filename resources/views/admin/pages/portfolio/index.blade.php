@@ -7,9 +7,12 @@
             @csrf
            <x-admin.input label="Name" name="title" type="text" required="required"/>
            <x-admin.input label="Percentage" name="percentage" type="number" required="required"/>
-           <textarea class="mt-5" name="description" id="description" cols="30" rows="10"></textarea>
+           <div class="mt-2">
+            <label for="description">Description</label>
+               <textarea class="mt-5" name="description" id="description" cols="30" rows="10"></textarea>
+           </div>
            <x-admin.select-input label="Category" name="category_id" :values="$categories" required="required"/>
-           <x-admin.input label="Image" name="image" type="file" multiple required="required"/>
+           <x-admin.input label="Image" name="image" type="file"  required="required"/>
 
 
             <div class="mt-5">

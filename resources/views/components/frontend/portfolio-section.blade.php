@@ -1,5 +1,6 @@
  @props(['portfolios'])
  <!-- Portfolio Section -->
+ @if($portfolios->count() > 0)
  <section class="portfolio-section py-5">
      <div class="container">
          <h2 class="section-title text-center">Our Portfolio</h2>
@@ -16,7 +17,7 @@
                                  <span class="category">{{ $portfolio->category->name }}</span>
                                  <h3>{{ $portfolio->title }}</h3>
                                  <p>{!! $portfolio->description !!}</p>
-                                 <a href="gallery.html" class="portfolio-link">
+                                 <a href="{{ route('front.gallery') }}" class="portfolio-link">
                                      <span>View Gallery</span>
                                      <i class="bi bi-arrow-right"></i>
                                  </a>
@@ -27,5 +28,6 @@
              @endforeach
 
          </div>
-     </div>
- </section>
+         </div>
+     </section>
+ @endif

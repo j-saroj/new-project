@@ -26,15 +26,9 @@ class SkillController extends Controller
      */
     public function store(Request $request)
     {
-        $skill = Skill::first();
-        if (!is_null($skill)) {
-            return redirect(route('skill.show', $skill->id));
-        }
         $validator = $request->validate([
             'name' => 'required|string',
             'percentage' => 'required|numeric',
-
-
         ]);
 
         $skill = Skill::create([

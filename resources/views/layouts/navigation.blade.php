@@ -17,16 +17,16 @@
          <div class="collapse navbar-collapse" id="navbarNav">
              <ul class="navbar-nav ms-auto">
                  <li class="nav-item">
-                     <a class="nav-link active" href="{{ route('front.home') }}">Home</a>
+                     <a class="nav-link @if(request()->is('/')) active @endif" href="{{ route('front.home') }}">Home</a>
                  </li>
                  <li class="nav-item">
-                     <a class="nav-link" href="{{ route('front.gallery') }}">Gallery</a>
+                     <a class="nav-link @if(request()->is('gallery')) active @endif" href="{{ route('front.gallery') }}">Gallery</a>
                  </li>
                  <li class="nav-item">
-                     <a class="nav-link" href="{{ route('front.experience') }}">Experience</a>
+                     <a class="nav-link @if(request()->is('experience')) active @endif" href="{{ route('front.experience') }}">Experience</a>
                  </li>
                  <li class="nav-item">
-                     <a class="nav-link" href="{{ route('front.contact') }}">Contact</a>
+                     <a class="nav-link @if(request()->is('contact')) active @endif " href="{{ route('front.contact') }}">Contact</a>
                  </li>
                  <li class="nav-item">
                      <a href="{{ route('front.contact') }}" class="nav-link book-now-btn">Book Now</a>

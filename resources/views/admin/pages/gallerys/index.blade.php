@@ -5,11 +5,8 @@
 
         <form action="{{ route('gallery.store') }}" method="post" enctype="multipart/form-data">
             @csrf
-
-            <x-admin.input name="title" label="Gallery Name" placeholder="Enter gallery name" />
-            <textarea class="form-control" name="description" id="description" placeholder="Enter description" rows="15">{{ old('description') }}</textarea>
             <x-admin.select-input name="portfolio_id" label="Select Portfolio" :values="$portfolios" />
-            <x-admin.input name="image" label="Select Image" multiple type="file" placeholder="Select Image" />
+            <x-admin.input name="image[]" label="Select Image" multiple type="file" placeholder="Select Image" />
 
             <div class="mt-5">
                 <input type="submit" value="Add" class="btn btn-success px-4 py-2 ">

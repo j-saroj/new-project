@@ -35,31 +35,25 @@ class GalleryController extends Controller
     public function store(Request $request)
     {
         $validator = $request->validate([
-            'title' => 'required',
-            'image' => 'required|mimes:jpg,png,jpeg',
-            'portfolio_id' => 'required',
+            'image.*' => 'required|image',
+            'portfolio_id' => 'required|exists:portfolio_items,id',
         ]);
-
         if ($request->hasFile('image')) {
-            $imageName = $request->user()->id . '_' . time() . '.' . $request->file('image')->getClientOriginalExtension();
-            $path = $request->file('image')->storeAs('images/gallery', $imageName);
+            foreach ($request->file('image') as $image) {
+                $path = $image->store('images/gallery');
+                GalleryImage::create([
+                    'portfolio_id' => $request->portfolio_id,
+                    'image' => $path,
+                ]);
+            }
         }
-        // dd($request->all());
-
-        $gallery = GalleryImage::create([
-            'title' => $request->title,
-            'description' => $request->description,
-            'portfolio_id' => $request->portfolio_id,
-            'image' => $path,
-        ]);
 
 
 
-        if ($gallery) {
-            return redirect(route('gallery.index'))->withSuccess('The gallery has been added!');
-        } else {
-            return redirect()->back()->withInput()->withErrors($validator);
-        }
+
+
+
+        return redirect(route('gallery.index'))->withSuccess('The gallery has been added!');
     }
 
 
@@ -88,17 +82,14 @@ class GalleryController extends Controller
     public function update(Request $request, GalleryImage $gallery)
     {
         $validator = $request->validate([
-            'title' => 'required',
+            'portfolio_id' => 'required|exists:portfolio_items,id',
             'image.*' => 'required|mimes:jpg,png,jpeg',
         ]);
         if ($request->hasFile('image')) {
-            $imageName = $request->user()->id . '_' . time() . '.' . $request->file('image')->getClientOriginalExtension();
-            $path = $request->file('image')->storeAs('pubic/images/gallery', $imageName);
+            $path = $request->file('image')->store('images/gallery');
         }
 
         $flag = $gallery->update([
-            'title' => $request->title,
-            'description' => $request->description,
             'portfolio_id' => $request->portfolio_id,
             'image' => $path,
         ]);
