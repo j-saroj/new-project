@@ -1,7 +1,7 @@
 @extends('admin.layout.main')
 @section('title', 'Gallery')
 @section('actions')
-    <x-admin.modal-add-form name="addblog" title="Add Blog">
+    <x-admin.modal-add-form name="addgallery" title="Add Gallery">
 
         <form action="{{ route('gallery.store') }}" method="post" enctype="multipart/form-data">
             @csrf

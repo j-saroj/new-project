@@ -29,8 +29,8 @@
                 @forelse ($gallery as $item)
                     <!-- Wedding Photos -->
                     <div class="gallery-item" data-category="wedding">
-                        <a href="{{asset($item->image)}}" data-lightbox="gallery" data-title="Wedding Photography">
-                            <img src="{{ asset($item->image) }}" alt="Wedding Photo" />
+                        <a href="'{{asset('storage/'.$item->image)}}" data-lightbox="gallery" data-title="Wedding Photography">
+                            <img src="{{ asset('storage/'.$item->image) }}" alt="Wedding Photo" />
                             <div class="gallery-overlay">
                                 <div class="gallery-info">
                                     <span class="gallery-category">{{ $item->category?->name }}</span>

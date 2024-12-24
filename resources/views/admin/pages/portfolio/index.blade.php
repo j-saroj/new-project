@@ -10,7 +10,6 @@
            <textarea class="mt-5" name="description" id="description" cols="30" rows="10"></textarea>
            <x-admin.select-input label="Category" name="category_id" :values="$categories" required="required"/>
            <x-admin.input label="Image" name="image" type="file" multiple required="required"/>
-           <x-admin.input label="Extra" name="extra" type="text" required="required"/>
 
 
             <div class="mt-5">

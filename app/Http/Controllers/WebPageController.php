@@ -2,10 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Award;
 use App\Models\Contact;
 use App\Models\Experience;
 use Illuminate\Http\Request;
 use App\Models\GalleryImage;
+use App\Models\JourneyStat;
+use App\Models\Organization;
+use App\Models\PortfolioItem;
+
+use App\Models\Skill;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 
 class WebPageController extends Controller
@@ -15,24 +21,36 @@ class WebPageController extends Controller
 
     public function index()
     {
+        $organization = Organization::first();
 
-        return view('pages.home');
+        $journeys = JourneyStat::get();
+        $portfolios = PortfolioItem::get();
+        $skills = Skill::get();
+        $galleryimages = GalleryImage::get();
+        $awards = Award::get();
+        return view('pages.homepage', compact('organization', 'journeys', 'portfolios', 'skills','galleryimages','awards'));
     }
+
 
     public function experience()
     {
-        $experiences = Experience::where('status', true)->get();
-        return view('pages.experience', compact('experiences'));
+        $organization = Organization::first();
+
+        $experiences = Experience::get();
+        return view('pages.experience', compact('experiences','organization'));
     }
 
     public function portfolio()
     {
-        
-        return view('pages.portfolio');
+        $organization = Organization::first();
+
+
+        return view('pages.portfolio',compact('organization'));
     }
     public function contactUs()
     {
-        return view('pages.contact');
+        $organization = Organization::first();
+        return view('pages.contact',['organization' => $organization]);
     }
 
     public function inquiry(Request $request)
@@ -40,7 +58,6 @@ class WebPageController extends Controller
         $this->validate($request, [
             'name' => 'required|string',
             'email' => 'required|email',
-            'number' => 'required',
             'message' => 'required|string',
         ]);
 
@@ -53,6 +70,7 @@ class WebPageController extends Controller
         ]);
 
         if ($msg) {
+            return redirect()->back()->withSuccess('The message has been sent!');
         } else {
             return redirect()->back()->withInput()->withErrors('The message could not be sent!');
         }
@@ -60,8 +78,9 @@ class WebPageController extends Controller
 
     public function gallery()
     {
-        $gallery = GalleryImage::where('status', true)->with('image')->get();
-        return view('pages.gallery', compact('gallery'));
+        $gallery = GalleryImage::get();
+        $organization = Organization::first();
+        return view('pages.gallery', compact('gallery','organization'));
     }
 
     public function gallery_detail($slug)
@@ -69,4 +88,5 @@ class WebPageController extends Controller
         $pages = GalleryImage::where('slug', $slug)->firstOrFail();
         // return view('pages.gallery.detail', ['album_item' => $pages]);
     }
+
 }

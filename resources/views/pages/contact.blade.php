@@ -32,12 +32,12 @@
                     <h2>Contact Information</h2>
                     <div class="contact-info mt-4">
                         <p>
-                            <i class="bi bi-geo-alt-fill"></i> 123 Photography Street, City,
-                            Country
+                            <i class="bi bi-geo-alt-fill"></i> {{$organization->address}}
+                            
                         </p>
-                        <p><i class="bi bi-telephone-fill"></i> +1 234 567 890</p>
+                        <p><i class="bi bi-telephone-fill"></i>{{$organization->phone}}</p>
                         <p>
-                            <i class="bi bi-envelope-fill"></i> info@timelessmemories.com
+                            <i class="bi bi-envelope-fill"></i> {{ $organization->email }}
                         </p>
                     </div>
                     <div class="map-container mt-4">

@@ -2,20 +2,18 @@
 
 namespace App\Enums;
 
-enum Category: int
+enum Status: int
 {
-    case Pending = 0;
-    case Confirmed = 1;
-    case Cancelled = 2;
-    case Completed = 3;
+    case On = 1;
+    case Off = 0;
+
 
     public function label(): string
     {
         return match ($this) {
-            self::Pending => 'Pending',
-            self::Confirmed => 'Confirmed',
-            self::Cancelled => 'Cancelled',
-            self::Completed => 'Completed',
+            self::On => 'On',
+            self::Off => 'Off',
+
         };
     }
 }

@@ -16,7 +16,7 @@ use Carbon\Carbon;
 class AdminPanelController extends Controller
 {
 
-   
+
 
 
     public function dashboard()
@@ -41,6 +41,7 @@ class AdminPanelController extends Controller
             return back()->with('error', 'Model not found.');
         }
     }
+  
 
 
     // public function getemailsubscribe()

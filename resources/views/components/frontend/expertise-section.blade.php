@@ -1,4 +1,4 @@
-  @props(['expertise' => []])
+  @props(['journeys','skills'])
   <section class="experience-section py-5">
       <div class="container">
           <h2 class="text-center mb-5">Our Journey and Expertise</h2>
@@ -6,33 +6,19 @@
           <!-- Stats Counter -->
           <div class="stats-counter mb-5">
               <div class="row g-4">
-                  <div class="col-md-4">
-                      <div class="counter-item">
-                          <div class="counter-icon">
-                              <i class="fas fa-heart"></i>
+                  @foreach ($journeys as $journey)
+                      <div class="col-md-4">
+                          <div class="counter-item">
+                              <div class="counter-icon">
+                                  <i class="fas {{ $journey->icon }}"></i>
+                              </div>
+                              <div class="counter-number" data-target="{{ $journey->count }}">0</div>
+                              <div class="counter-label">{{ $journey->title }}</div>
                           </div>
-                          <div class="counter-number" data-target="500">0</div>
-                          <div class="counter-label">Wedding Events</div>
                       </div>
-                  </div>
-                  <div class="col-md-4">
-                      <div class="counter-item">
-                          <div class="counter-icon">
-                              <i class="fas fa-camera"></i>
-                          </div>
-                          <div class="counter-number" data-target="1000">0</div>
-                          <div class="counter-label">Portrait Sessions</div>
-                      </div>
-                  </div>
-                  <div class="col-md-4">
-                      <div class="counter-item">
-                          <div class="counter-icon">
-                              <i class="fas fa-building"></i>
-                          </div>
-                          <div class="counter-number" data-target="200">0</div>
-                          <div class="counter-label">Corporate Events</div>
-                      </div>
-                  </div>
+                    @endforeach
+
+
               </div>
           </div>
           <!-- Expertise Grid -->
@@ -53,33 +39,18 @@
                                   precious moments.
                               </p>
                               <div class="expertise-skills">
+                                @foreach ($skills as $skill)
+
                                   <div class="skill-item">
                                       <div class="skill-info">
-                                          <span>Wedding Photography</span>
-                                          <span>95%</span>
+                                          <span>{{ $skill->name }}</span>
+                                          <span>{{ $skill->percentage }}%</span>
                                       </div>
                                       <div class="skill-progress">
-                                          <div class="progress-bar" style="width: 95%"></div>
+                                          <div class="progress-bar" style="width: {{ $skill->percentage }}%"></div>
                                       </div>
                                   </div>
-                                  <div class="skill-item">
-                                      <div class="skill-info">
-                                          <span>Portrait Photography</span>
-                                          <span>90%</span>
-                                      </div>
-                                      <div class="skill-progress">
-                                          <div class="progress-bar" style="width: 90%"></div>
-                                      </div>
-                                  </div>
-                                  <div class="skill-item">
-                                      <div class="skill-info">
-                                          <span>Event Photography</span>
-                                          <span>85%</span>
-                                      </div>
-                                      <div class="skill-progress">
-                                          <div class="progress-bar" style="width: 85%"></div>
-                                      </div>
-                                  </div>
+                                  @endforeach
                               </div>
                           </div>
                       </div>

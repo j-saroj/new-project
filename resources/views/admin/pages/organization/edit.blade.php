@@ -10,26 +10,20 @@
         <x-admin.input name="phone" label="Phone" placeholder="Enter Phone" :oldvalue="$organization->phone" />
         <x-admin.input name="website" label="Website" placeholder="Enter Website" :oldvalue="$organization->website" />
         {{-- <x-admin.input name="description" label="Description" placeholder="Enter Description" --}}
-            {{-- value="{{ $organization->description }}" /> --}}
+        {{-- value="{{ $organization->description }}" /> --}}
         <textarea class="form-control" name="description" id="description" placeholder="Enter description" rows="15">
                 @isset($organization->description)
 {{ old('description', $organization->description) }}
 @endisset
             </textarea>
 
-            <div class="mt-2 row">
-                        <div class="col-9">
-                            <img src="{{ asset('storage/' . $organization->logo) }}" height="200px" width="auto" class="px-3"
-                                alt="" srcset="">
-                        </div>
-                        <div class="col-3">
-                            @php
-                                $modelClassName = get_class($organization);
-                            @endphp
-                            <a href="{{ route('detach.image', ['model_type' => $modelClassName, 'model_id' => $setting->id, 'image' => $image->id]) }}"
-                                class="btn btn-danger">Delete</a>
-                        </div>
-                    </div>
+        <div class="mt-2 row">
+            <div class="col-9">
+                <img src="{{ asset('storage/' . $organization->logo) }}" height="200px" width="auto" class="px-3"
+                    alt="" srcset="">
+            </div>
+
+        </div>
         <x-admin.input name="motto" label="Motto" placeholder="Enter Motto" :oldvalue="$organization->motto" />
         <x-admin.input name="title" label="Title" placeholder="Enter Homepage Title" :oldvalue="$organization->title" />
         <x-admin.input name="sublitle" label="Sub Title" placeholder="Enter Homepage Sub-Title" :oldvalue="$organization->sublitle" />

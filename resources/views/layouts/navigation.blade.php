@@ -1,8 +1,15 @@
  <nav class="navbar navbar-expand-lg fixed-top">
      <div class="container">
-         <a class="navbar-brand" href="index.html">
-             <span class="brand-first">Timeless</span>
-             <span class="brand-second">Memories</span>
+         <a class="navbar-brand" href="{{ route('front.home') }}">
+            @isset($organization->name)
+
+            <span class="brand-first">{{ $organization->name }}</span>
+            @else
+            <span class="brand-first">TIMELESS</span>
+            <span class="brand-second">MEMORIES</span>
+
+            @endisset
+
          </a>
          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
              <span class="navbar-toggler-icon"></span>

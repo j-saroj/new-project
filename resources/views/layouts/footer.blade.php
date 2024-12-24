@@ -3,16 +3,37 @@
     <div class="container">
         <div class="row g-4">
             <div class="col-lg-4 col-md-6">
-                <h5 class="mb-4">Timeless Memories</h5>
+
+                @isset($organization->name)
+
+                    <h5 class="mb-4">{{ $organization->name }}</h5>
+                @else
+                    <h5 class="mb-4">TIMELESS MEMORIES</h5>
+                @endisset
+
                 <p class="mb-4">
-                    Professional Photography Services capturing your precious moments
-                    with elegance and style.
+                    @isset($organization->sublitle)
+                        {{ $organization->sublitle }}
+
+                    @endisset
                 </p>
                 <div class="social-links">
-                    <a href="#" class="text-white me-3"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" class="text-white me-3"><i class="fab fa-instagram"></i></a>
-                    <a href="#" class="text-white me-3"><i class="fab fa-twitter"></i></a>
-                    <a href="#" class="text-white"><i class="fab fa-linkedin-in"></i></a>
+                    @isset($organization->facebook)
+                        <a href="{{ $organization->facebook }}" class="text-white me-3"><i class="fab fa-facebook-f"></i></a>
+
+                    @endisset
+                    @isset($organization->instagram)
+                        <a href="{{ $organization->instagram }}" class="text-white me-3"><i
+                                class="fab fa-instagram"></i></a>
+                    @endisset
+                    @isset($organization->twitter)
+                        <a href="{{ $organization->twitter }}" class="text-white me-3"><i class="fab fa-twitter"></i></a>
+                    @endisset
+                    @isset($organization->linkedin)
+                        <a href="{{ $organization->linkedin }}" class="text-white"><i class="fab fa-linkedin-in"></i></a>
+                    @endisset
+
+
                 </div>
             </div>
             <div class="col-lg-2 col-md-6">
@@ -37,27 +58,35 @@
                 <h5 class="mb-4">Contact Info</h5>
                 <ul class="footer-contact list-unstyled">
                     <li class="mb-3">
+                        @isset($organization->address)
                         <i class="fas fa-map-marker-alt me-2"></i>
-                        123 Photography Street, City, Country
-                    </li>
-                    <li class="mb-3">
-                        <i class="fas fa-phone me-2"></i>
-                        +1 234 567 890
-                    </li>
-                    <li class="mb-3">
+                            {{ $organization->address }}
+                        @endisset
+                        </li>
+                        <li class="mb-3">
+                            @isset($organization->phone)
+                            <i class="fas fa-phone me-2"></i>
+
+                                {{ $organization->phone }}
+                            @endisset
+                        </li>
+                        <li class="mb-3">
+                            @isset($organization->email)
                         <i class="fas fa-envelope me-2"></i>
-                        info@timelessmemories.com
-                    </li>
-                </ul>
+                                {{ $organization->email }}
+
+                            @endisset
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-12">
+                    <hr class="footer-divider" />
+                    <p class="text-center mb-0">
+                        © 2024 Timeless Memories. All rights reserved.
+                    </p>
+                </div>
             </div>
         </div>
-        <div class="row mt-4">
-            <div class="col-12">
-                <hr class="footer-divider" />
-                <p class="text-center mb-0">
-                    © 2024 Timeless Memories. All rights reserved.
-                </p>
-            </div>
-        </div>
-    </div>
-</footer>
+    </footer>

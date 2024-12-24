@@ -11,6 +11,7 @@ class GalleryImage extends Model
         'description',
         'image',
         'portfolio_id',
+        'status',
         'extra',
     ]);
 

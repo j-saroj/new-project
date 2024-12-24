@@ -42,7 +42,7 @@ class GalleryController extends Controller
 
         if ($request->hasFile('image')) {
             $imageName = $request->user()->id . '_' . time() . '.' . $request->file('image')->getClientOriginalExtension();
-            $path = $request->file('image')->storeAs('images/members', $imageName);
+            $path = $request->file('image')->storeAs('images/gallery', $imageName);
         }
         // dd($request->all());
 
@@ -76,7 +76,10 @@ class GalleryController extends Controller
      */
     public function edit(GalleryImage $gallery)
     {
-        return view('admin.pages.gallerys.edit', ['gallery' => $gallery]);
+        $portfolios = PortfolioItem::all();
+        $data = PortfolioItem::find($gallery->portfolio_id);
+
+        return view('admin.pages.gallerys.edit', ['gallery' => $gallery, 'portfolios' => $portfolios, 'data' => $data]);
     }
 
     /**
@@ -85,24 +88,22 @@ class GalleryController extends Controller
     public function update(Request $request, GalleryImage $gallery)
     {
         $validator = $request->validate([
-            'name' => 'required',
+            'title' => 'required',
             'image.*' => 'required|mimes:jpg,png,jpeg',
         ]);
+        if ($request->hasFile('image')) {
+            $imageName = $request->user()->id . '_' . time() . '.' . $request->file('image')->getClientOriginalExtension();
+            $path = $request->file('image')->storeAs('pubic/images/gallery', $imageName);
+        }
 
         $flag = $gallery->update([
-            'name' => $request->name,
-            'order' => $request->order,
-            'nepali_name' => $request->nepali_name,
+            'title' => $request->title,
+            'description' => $request->description,
+            'portfolio_id' => $request->portfolio_id,
+            'image' => $path,
         ]);
 
-        if ($request->hasFile('image')) {
-            foreach ($gallery->image as $img) {
-                $gallery->image()->detach($img->id);
-            }
-            $imageName = $request->user()->id . '_' . time() . '.' . $request->file('image')->getClientOriginalExtension();
-            $path = $request->file('image')->storeAs('images/members', $imageName);
-            $img = $gallery->image()->create(['image' => $path]);
-        }
+
         if ($flag) {
             return redirect(route('gallery.index'))->withSuccess('The gallery has been updated!');
         } else {

@@ -89,6 +89,27 @@
                 </a>
             </li>
 
+            <li class="nav-item w-100" @if (route('experience.index') == url()->current()) active @endif>
+                <a class="nav-link" href="{{ route('experience.index') }}">
+                    <i class="fe fe-image fe-16"></i>
+                    <span class="ml-3 item-text">Experience</span>
+                </a>
+            </li>
+
+            <li class="nav-item w-100" @if (route('award.index') == url()->current()) active @endif>
+                <a class="nav-link" href="{{ route('award.index') }}">
+                    <i class="fe fe-image fe-16"></i>
+                    <span class="ml-3 item-text">Award</span>
+                </a>
+            </li>
+
+            <li class="nav-item w-100" @if (route('journey.index') == url()->current()) active @endif>
+                <a class="nav-link" href="{{ route('journey.index') }}">
+                    <i class="fe fe-image fe-16"></i>
+                    <span class="ml-3 item-text">Journey Stat</span>
+                </a>
+            </li>
+
 
 
 

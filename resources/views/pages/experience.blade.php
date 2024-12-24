@@ -2,8 +2,35 @@
 
 @section('content')
     <x-frontend.page-header title="Our Experience" description="Explore our journey and expertise in photography" />
+    <!-- Timeline Section -->
+    <section class="journey-section py-5">
+        <div class="container">
+            <h2 class="section-title text-center">Our Journey</h2>
+            <div class="journey-timeline">
+                @foreach ($experiences as $experience)
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-date">From: {{ \Carbon\Carbon::parse($experience->start_date)->format('F d, Y') }}</div>
+                        <div class="timeline-date">To: {{ \Carbon\Carbon::parse($experience->end_date)->format('F d, Y') }}</div>
+
+                        <div class="timeline-content">
+                            <h3>{{ $experience->title }}</h3>
+                            <p>{!! $experience->description !!}</p>
+                            <div class="timeline-badges">
+                                <span class="badge"><i class="bi bi-trophy"></i> Best Studio Award</span>
+                                <span class="badge"><i class="bi bi-people"></i> Team of 10 Experts</span>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+
+            </div>
+        </div>
+    </section>
+
+
     <!-- Expertise Section -->
-    <section class="expertise-section py-5 bg-light">
+    {{-- <section class="expertise-section py-5 bg-light">
         <div class="container">
             <h2 class="section-title text-center">Our Expertise</h2>
             <div class="row g-4">
@@ -14,7 +41,7 @@
                             <div class="expertise-icon">
                                 <i class="bi bi-heart"></i>
                             </div>
-                            <h3>{{ $item->title }}</h3>
+                            <h3>{{ $item->name }}</h3>
                             <div class="expertise-progress">
                                 <div class="progress-ring">
                                     <div class="progress-circle" data-value="{{ $item->percentage }}">
@@ -79,5 +106,5 @@
 
             </div>
         </div>
-    </section>
+    </section> --}}
 @endsection
