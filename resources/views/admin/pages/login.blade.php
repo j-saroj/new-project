@@ -29,7 +29,7 @@
             <form class="col-lg-3 col-md-4 col-10 mx-auto text-center" method="POST"
                 action="{{ route('authenticate') }}">
                 @csrf
-                <a class="navbar-brand mx-auto mt-2 flex-fill text-center" href="{{ route('home') }}"
+                <a class="navbar-brand mx-auto mt-2 flex-fill text-center" href="{{ route('front.home') }}"
                     style="margin-bottom: 20px;">
                     {{-- <img src="{{ asset('storage/'. $organization->logo) }}" height="auto" width="100px" /> --}}
                 </a>

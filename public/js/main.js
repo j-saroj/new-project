@@ -1,122 +1,177 @@
-/*  ---------------------------------------------------
-    Template Name: Manup
-    Description: Manup Event HTML Template
-    Author: Colorlib
-    Author URI: http://colorlib.com
-    Version: 1.0
-    Created: Colorlib
----------------------------------------------------------  */
-
-'use strict';
-
-(function ($) {
-
-    /*------------------
-        Preloader
-    --------------------*/
-    $(window).on('load', function () {
-        $(".loader").fadeOut();
-        $("#preloder").delay(200).fadeOut("slow");
+// Smooth scrolling for anchor links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+            behavior: 'smooth'
+        });
     });
+});
 
-    /*------------------
-        Background Set
-    --------------------*/
-    $('.set-bg').each(function () {
-        var bg = $(this).data('setbg');
-        $(this).css('background-image', 'url(' + bg + ')');
+// Portfolio image loading animation
+window.addEventListener('load', () => {
+    document.querySelectorAll('.portfolio-item').forEach((item, index) => {
+        setTimeout(() => {
+            item.style.opacity = '1';
+        }, index * 200);
     });
+});
 
-    /*------------------
-		Navigation
-	--------------------*/
-    $(".mobile-menu").slicknav({
-        prependTo: '#mobile-menu-wrap',
-        allowParentLinks: true
-    });
+// Counter Animation
+function animateCounter(element) {
+    const target = parseInt(element.getAttribute('data-target'));
+    const duration = 2000; // 2 seconds
+    const step = target / (duration / 16); // 60fps
+    let current = 0;
 
-    /*------------------------
-		Partner Slider
-    ----------------------- */
-    $(".partner-logo").owlCarousel({
-        items: 6,
-        dots: false,
-        autoplay: true,
-        loop: true,
-        smartSpeed: 1200,
-        margin: 116,
-        responsive: {
-            320: {
-                items: 2,
-            },
-            480: {
-                items: 3,
-            },
-            768: {
-                items: 4,
-            },
-            992: {
-                items: 5,
-            },
-            1200: {
-                items: 6
-            }
+    const counter = setInterval(() => {
+        current += step;
+        if (current >= target) {
+            element.textContent = target + '+';
+            clearInterval(counter);
+        } else {
+            element.textContent = Math.floor(current) + '+';
+        }
+    }, 16);
+}
+
+// Start counter animation when element is in view
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const counters = entry.target.querySelectorAll('.counter-number');
+            counters.forEach(counter => animateCounter(counter));
+            observer.unobserve(entry.target);
         }
     });
+});
 
-    /*------------------------
-		Testimonial Slider
-    ----------------------- */
-    $(".testimonial-slider").owlCarousel({
-        items: 2,
-        dots: false,
-        autoplay: false,
-        loop: true,
-        smartSpeed: 1200,
-        nav: true,
-        navText: ["<span class='fa fa-angle-left'></span>", "<span class='fa fa-angle-right'></span>"],
-        responsive: {
-            320: {
-                items: 1,
-            },
-            768: {
-                items: 2
-            }
-        }
-    });
+document.querySelectorAll('.stats-counter').forEach(counter => {
+    observer.observe(counter);
+});
 
-    /*------------------
-        Magnific Popup
-    --------------------*/
-    $('.video-popup').magnificPopup({
-        type: 'iframe'
-    });
-
-    /*------------------
-        CountDown
-    --------------------*/
-    // For demo preview
-    var today = new Date();
-    var dd = String(today.getDate()).padStart(2, '0');
-    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-    var yyyy = today.getFullYear();
-
-    if(mm == 12) {
-        mm = '01';
-        yyyy = yyyy + 1;
+// Navbar scroll effect
+window.addEventListener('scroll', function () {
+    const navbar = document.querySelector('.navbar');
+    if (window.scrollY > 50) {
+        navbar.classList.add('scrolled');
     } else {
-        mm = parseInt(mm) + 1;
-        mm = String(mm).padStart(2, '0');
+        navbar.classList.remove('scrolled');
     }
-    var timerdate = mm + '/' + dd + '/' + yyyy;
-    // For demo preview end
-    
+});
 
-    // Use this for real timer date
-    /*  var timerdate = "2020/01/01"; */
+// Circular progress animation
+function setProgress(element) {
+    const value = element.dataset.value;
+    element.style.setProperty('--progress', `${value}%`);
+}
 
-	$("#countdown").countdown(timerdate, function(event) {
-        $(this).html(event.strftime("<div class='cd-item'><span>%D</span> <p>Days</p> </div>" + "<div class='cd-item'><span>%H</span> <p>Hrs</p> </div>" + "<div class='cd-item'><span>%M</span> <p>Mins</p> </div>" + "<div class='cd-item'><span>%S</span> <p>Secs</p> </div>"));
+// Animate progress when in view
+const progressObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const circles = entry.target.querySelectorAll('.progress-circle');
+            circles.forEach(circle => setProgress(circle));
+            progressObserver.unobserve(entry.target);
+        }
     });
+});
 
-})(jQuery);
+document.querySelectorAll('.expertise-section').forEach(section => {
+    progressObserver.observe(section);
+});
+
+// Gallery filter functionality
+document.querySelectorAll('.filter-btn').forEach(button => {
+    button.addEventListener('click', function () {
+        // Remove active class from all buttons
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.classList.remove('active');
+        });
+
+        // Add active class to clicked button
+        this.classList.add('active');
+
+        // Get filter value
+        const filterValue = this.getAttribute('data-filter');
+
+        // Filter gallery items
+        document.querySelectorAll('.gallery-item').forEach(item => {
+            if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
+                item.style.display = 'block';
+            } else {
+                item.style.display = 'none';
+            }
+        });
+    });
+});
+
+// Image Dialog Functionality
+const imageDialog = document.getElementById('imageDialog');
+const dialogImage = document.getElementById('dialogImage');
+const dialogClose = document.getElementById('dialogClose');
+const prevButton = document.getElementById('prevImage');
+const nextButton = document.getElementById('nextImage');
+
+let currentImageIndex = 0;
+const galleryImages = document.querySelectorAll('.gallery-item img');
+const imageSources = Array.from(galleryImages).map(img => img.src);
+
+// Open dialog
+galleryImages.forEach((img, index) => {
+    img.addEventListener('click', (e) => {
+        e.preventDefault();
+        currentImageIndex = index;
+        showImage(currentImageIndex);
+        imageDialog.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    });
+});
+
+// Close dialog
+dialogClose.addEventListener('click', () => {
+    imageDialog.classList.remove('active');
+    document.body.style.overflow = '';
+});
+
+// Close on background click
+imageDialog.addEventListener('click', (e) => {
+    if (e.target === imageDialog) {
+        imageDialog.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+});
+
+// Previous image
+prevButton.addEventListener('click', () => {
+    currentImageIndex = (currentImageIndex - 1 + imageSources.length) % imageSources.length;
+    showImage(currentImageIndex);
+});
+
+// Next image
+nextButton.addEventListener('click', () => {
+    currentImageIndex = (currentImageIndex + 1) % imageSources.length;
+    showImage(currentImageIndex);
+});
+
+// Keyboard navigation
+document.addEventListener('keydown', (e) => {
+    if (!imageDialog.classList.contains('active')) return;
+
+    if (e.key === 'Escape') {
+        imageDialog.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+    if (e.key === 'ArrowLeft') {
+        currentImageIndex = (currentImageIndex - 1 + imageSources.length) % imageSources.length;
+        showImage(currentImageIndex);
+    }
+    if (e.key === 'ArrowRight') {
+        currentImageIndex = (currentImageIndex + 1) % imageSources.length;
+        showImage(currentImageIndex);
+    }
+});
+
+function showImage(index) {
+    dialogImage.src = imageSources[index];
+} 
